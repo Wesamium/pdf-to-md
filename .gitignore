@@ -1,0 +1,13 @@
+# Standard Python and OS ignores
+__pycache__/
+*.py[cod]
+*$py.class
+.DS_Store
+.env
+.vscode/
+.idea/
+.git/
+*.log
+*.tmp
+*.swp
+*.swo

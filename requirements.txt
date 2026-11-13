@@ -1,0 +1,5 @@
+pymupdf
+pymupdf4llm
+rapidocr
+onnxruntime
+scipy
