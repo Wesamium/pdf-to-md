@@ -1,12 +1,14 @@
-# PDF to Markdown Skill
+# PDF to Markdown Skill (v1.1.0)
 
 This skill converts PDF files into well-structured, layout-aware Markdown files. It is designed to reduce token usage for LLM-based projects while maintaining high accuracy and human readability.
 
 ## Capabilities
 
 - **Accurate Conversion**: Uses `pymupdf4llm` with its layout engine to preserve headings, tables, and lists.
+- **Metadata & YAML Frontmatter**: Automatically extracts and injects PDF metadata into a YAML block at the top of the output file.
+- **Image Placeholders**: Inserts descriptive placeholders for images (e.g., `![Image 1: Description]`) to preserve the document's visual structure.
 - **Clean Markdown**: Automatically handles boilerplate removal, heading normalization, and spacing cleanup.
-- **Summary Report**: Provides a concise 2-column summary table (Before vs. After) including metadata, content stats, and a warning count.
+- **Summary Report**: Provides a concise 2-column summary table (Before vs. After) including file metadata, content stats, and conversion time.
 - **OCR Support**: Automatically detects and processes scanned PDFs using `rapidocr`.
 
 ## Agent Instructions: Zero-Config Setup
@@ -31,7 +33,7 @@ Provide a PDF file to the agent and ask it to convert it to Markdown.
 
 - **Backend**: Python 3.x environment with `pymupdf4llm`, `rapidocr`, and `onnxruntime`.
 - **Formatting**: 
-    - Front matter includes source metadata, page counts, and conversion status.
+    - YAML Frontmatter includes source metadata, page counts, and conversion status.
     - Page markers (`<!-- page X -->`) are inserted for AI navigation.
     - Tables are formatted in GitHub Flavored Markdown (GFM).
 - **Post-processing**: 
@@ -48,5 +50,5 @@ The final output will include a table:
 | **File** · `filename.pdf` | `filename.md` |
 | **Size** · 100 KB | 10 KB (-90%) |
 | **Content** · 5 pages | 1,000 words · 200 lines |
-| **Quality** · 100% text coverage · 15 headings · 0 table rows · 0 warnings |
+| **Quality** · 100% text coverage · 15 headings · 0 table rows |
 | **Time** · 0.2s scan | 5.0s convert |

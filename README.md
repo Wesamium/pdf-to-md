@@ -1,6 +1,6 @@
-# PDF to Markdown Skill
+# PDF to Markdown Skill (v1.1.0)
 
-A high-performance, security-first tool designed to convert PDF documents into clean, structured Markdown files. This skill is optimized for AI workflows to reduce token consumption while preserving the layout, headings, and tables of the original document.
+A high-performance tool designed to convert PDF documents into clean, structured Markdown files. This skill is optimized for AI workflows to reduce token consumption while preserving the layout, headings, and tables of the original document.
 
 ## 🛠 System Requirements
 
@@ -20,9 +20,10 @@ This skill is designed to be "plug-and-play." Once Python is installed, you only
 ## ✨ Features
 
 - **Accurate Conversion**: Uses `pymupdf4llm` with its layout engine to preserve headings, tables, and lists.
-- **Security First**: Every PDF undergoes a mandatory multi-stage security scan (byte-level signature check, structural inspection, and Windows Defender/ClamAV integration) before processing.
+- **Metadata & YAML Frontmatter**: Automatically extracts PDF metadata (Author, Title, Creation Date, etc.) and injects it into a YAML block at the top of the Markdown file for better context.
+- **Image Placeholders**: Detects images within the PDF and inserts descriptive placeholders in the Markdown (e.g., `![Image 1: Description]`), preserving the document's visual structure without the overhead of image extraction.
 - **Clean Markdown**: Automatically handles boilerplate removal, heading normalization, and spacing cleanup.
-- **Summary Report**: Provides a concise 2-column summary table (Before vs. After) including metadata, security verdicts, and a warning count.
+- **Summary Report**: Provides a concise 2-column summary table (Before vs. After) including file metadata, content stats, and conversion time.
 - **OCR Support**: Automatically detects and processes scanned PDFs using `rapidocr`.
 
 ## 📖 Usage
@@ -32,16 +33,11 @@ Provide a PDF file to the agent and ask it to convert it to Markdown.
 **Example Prompt:**
 > "Convert this PDF to markdown and give me a summary of the results."
 
-## 🛡 Security Policy
-
-- **Block on Malicious**: If the security scanner detects malicious content, the conversion is immediately aborted.
-- **Suspicious Content**: Files with risk indicators will be blocked unless the user explicitly allows them using the `--allow-suspicious` flag (available via agentic reasoning).
-
 ## 🛠 Technical Specifications
 
 - **Backend**: Python 3.x environment.
 - **Formatting**: 
-    - Front matter includes source metadata, page counts, and security status.
+    - YAML Frontmatter includes source metadata, page counts, and conversion status.
     - Page markers (`<!-- page X -->`) are inserted for AI navigation.
     - Tables are formatted in GitHub Flavored Markdown (GFM).
 - **Post-processing**: 
